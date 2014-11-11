@@ -8,7 +8,7 @@
 # from the key press event... maybe a loop to keep checking until the rocket goes out of bounds?
 from Tkinter import *
 root = Tk()
-drawpad = Canvas(root, width=800,height=600, background='white')
+drawpad = Canvas(root, width=800,height=600, background='black')
 player = drawpad.create_oval(390,580,410,600, fill="blue")
 enemy = drawpad.create_rectangle(50,50,100,60, fill="red")
 
@@ -28,7 +28,7 @@ class myApp(object):
         self.label1 = Label(root, text=self.prompt, width=len(self.prompt), bg='green')
         self.label1.pack()
 
-        self.rockets = 3
+        self.rockets = 6000
         
         self.rocketsTxt = Label(root, text=str(self.rockets), width=len(str(self.rockets)), bg='green')
         self.rocketsTxt.pack()
@@ -55,10 +55,24 @@ class myApp(object):
         global player
         if event.char == "w":
             drawpad.move(player,0,-4)
+        global player
+        if event.char == "s":
+            drawpad.move(player,0,4)
+            if ry1 < 580:    
+                downpad.move(player,0,-4)
         
+        global player
+        if event.char == "d":    
+             drawpad.move(player,4,0)   
+             if ry1 < 580:
+        global player
+        if event.char == "s":    
+             drawpad.move(player,-4,0)  
+    
     def collisionDetect(self,rocket):
         rx1,ry1,rx2,ry2 = drawpad.coords(rocket)
         
-
+    
+        
 app = myApp(root)
 root.mainloop()
